@@ -21,6 +21,8 @@ public class PanelManager extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setBackground(Color.BLACK);
+        this.setIconImage( new ImageIcon("res/SnakeIcon.png").getImage());
+        this.setTitle("Snake");
         currentPanel = new MenuPanel();
         this.add(currentPanel);
         this.setVisible(true);
