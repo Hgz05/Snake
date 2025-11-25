@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PanelManager extends JFrame {
 
-    public static JPanel currentPanel;
+    private JPanel currentPanel;
     public enum panelTypes{
 
         MAINMENU,
@@ -59,7 +59,11 @@ public class PanelManager extends JFrame {
             this.repaint();
         }
         case RANKINGS -> {
-            return;
+            this.remove(currentPanel);
+            currentPanel = new RankingsPanel(this);
+            this.add(currentPanel);
+            this.revalidate();
+            this.repaint();
         }
         case GAME -> {
             return;
