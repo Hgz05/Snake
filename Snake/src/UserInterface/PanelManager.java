@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PanelManager extends JFrame {
 
-    private JPanel currentPanel;
+    public static JPanel currentPanel;
     public enum panelTypes{
 
         MAINMENU,
@@ -20,35 +20,43 @@ public class PanelManager extends JFrame {
         this.setSize(720,720);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setBackground(Color.BLACK);
+        this.setMaximumSize(new Dimension(720,720));
+        this.setBackground(Color.white);
         this.setIconImage( new ImageIcon("res/SnakeIcon.png").getImage());
         this.setTitle("Snake");
-        currentPanel = new MenuPanel();
+        currentPanel = new MenuPanel(this);
         this.add(currentPanel);
         this.setVisible(true);
 
     }
 
-    public void setCurrentPanel(JPanel panelToSet){
-        currentPanel = panelToSet;
-    }
+
+
 
     public JPanel getCurrentPanel(){
         return currentPanel;
     }
 
-    public static void panelChange(panelTypes panelToChangeTo){
+    public void panelChange(panelTypes panelToChangeTo){
 
     switch (panelToChangeTo){
 
         case MAINMENU -> {
-            return;
+            this.remove(currentPanel);
+            currentPanel = new MenuPanel(this);
+            this.add(currentPanel);
+            this.revalidate();
+            this.repaint();
         }
         case LEVELS -> {
             return;
         }
         case TUTORIAL -> {
-            return;
+            this.remove(currentPanel);
+            currentPanel = new TutorialPanel(this);
+            this.add(currentPanel);
+            this.revalidate();
+            this.repaint();
         }
         case RANKINGS -> {
             return;
