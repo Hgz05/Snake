@@ -7,13 +7,17 @@ public class GameHandler {
 
     ArrayList<Level> levelArray;
     JFrame mainFrame;
+    public static final int numberOfLevels = 1;
 
     public void setMainFrame(JFrame Frame){
         mainFrame = Frame;
     }
     public GameHandler(){
-        //Fill the level Array with level objects
-
+        levelArray = new ArrayList<>();
+        for (int i = 1; i <= numberOfLevels; i++) {
+            Level currentLevel = new Level(i);
+            levelArray.add(currentLevel);
+        }
 
     }
 
