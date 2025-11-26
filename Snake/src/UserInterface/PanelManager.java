@@ -1,22 +1,25 @@
 package UserInterface;
 
+import GameEngine.GameHandler;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class PanelManager extends JFrame {
 
     private JPanel currentPanel;
+    private GameHandler game;
     public enum panelTypes{
 
         MAINMENU,
         LEVELS,
         TUTORIAL,
-        RANKINGS,
-        GAME
+        RANKINGS
     }
 
-    public PanelManager(){
+    public PanelManager(GameHandler currentGame){
 
+        game = currentGame;
         this.setSize(720,720);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -53,9 +56,7 @@ public class PanelManager extends JFrame {
         case RANKINGS -> {
             currentPanel = new RankingsPanel(this);
         }
-        case GAME -> {
-            return;
-        }
+
 
 
         case null, default -> throw new IllegalArgumentException();
@@ -64,6 +65,13 @@ public class PanelManager extends JFrame {
         this.add(currentPanel);
         this.revalidate();
         this.repaint();
+
+    }
+
+    public void gameRun(int i){
+
+        this.remove(currentPanel);
+        game.runLevel(i);
 
     }
 

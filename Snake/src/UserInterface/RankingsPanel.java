@@ -18,7 +18,7 @@ public class RankingsPanel extends JPanel {
     JPanel rankingsPanel;
     JPanel backPanel;
     ArrayList<JTable> rankingsArray;
-    int currentLevel = 10;
+    int currentLevel = 1;
 
     public RankingsPanel(PanelManager Frame){
 
@@ -36,7 +36,7 @@ public class RankingsPanel extends JPanel {
 
         //Rankings Panel Changer Title
         JPanel rpcTitle = new JPanel();
-        JLabel rpcText = new JLabel("Top 10 players of level : " + currentLevel);
+        JLabel rpcText = new JLabel("Top 20 scores of level : " + currentLevel);
         rpcTitle.add(rpcText);
 
 
@@ -50,7 +50,7 @@ public class RankingsPanel extends JPanel {
             rankingsPanel.remove(rankingsArray.get(currentLevel-1));
             currentLevel--;
             rankingsPanel.add(rankingsArray.get(currentLevel-1));
-            rpcText.setText("Top 10 players of level : " + currentLevel);
+            rpcText.setText("Top 20 scores of level : " + currentLevel);
             parentFrame.revalidate();
             parentFrame.repaint();
         });
@@ -61,7 +61,7 @@ public class RankingsPanel extends JPanel {
             rankingsPanel.remove(rankingsArray.get(currentLevel-1));
             currentLevel++;
             rankingsPanel.add(rankingsArray.get(currentLevel-1));
-            rpcText.setText("Top 10 players of level : " + currentLevel);
+            rpcText.setText("Top 20 scores of level : " + currentLevel);
             parentFrame.revalidate();
             parentFrame.repaint();
         });
@@ -88,10 +88,10 @@ public class RankingsPanel extends JPanel {
                 for(int j  = 0; j<list.size(); j++){
                     data[j] = list.get(j).split(";");
                 }
-                Arrays.sort(data, (x,y) -> Integer.compare((int)x[1], (int)y[1]));
-                Object[][] sortedData = new Object[list.size() > 10 ? 10 : list.size()][3];
+                Arrays.sort(data, (x,y) -> Integer.compare(Integer.parseInt(x[1].toString()), Integer.parseInt(y[1].toString())));
+                Object[][] sortedData = new Object[list.size() > 20 ? 20 : list.size()][3];
                 for(int k = 0; k<list.size(); k++){
-                    if(k == 10) break;
+                    if(k == 20) break;
                     sortedData[k][0] = k+1;
                     sortedData[k][1] = data[k][0];
                     sortedData[k][2] = data[k][1];
