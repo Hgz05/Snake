@@ -5,13 +5,20 @@ import UserInterface.BasicComponents.TitlePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RankingsPanel extends JPanel {
 
     PanelManager parentFrame;
     JPanel titlePanel;
+    JPanel rankingsChangerPanel;
     JPanel rankingsPanel;
     JPanel backPanel;
+    ArrayList<JTable> rankingsArray;
+    int currentLevel = 10;
 
     public RankingsPanel(PanelManager Frame){
 
@@ -21,12 +28,97 @@ public class RankingsPanel extends JPanel {
         //Title Panel
         titlePanel = new TitlePanel("res/Placeholder.jpg", new Dimension(720,240));
 
-        //Rankings Panel
+
+        //Panel that contains Rankings Panel changer and Rankings panel
+
+        JPanel rankingsWrapper = new JPanel(new BorderLayout());
+        rankingsWrapper.setBackground(Color.black);
+
+        //Rankings Panel Changer Title
+        JPanel rpcTitle = new JPanel();
+        JLabel rpcText = new JLabel("Top 10 players of level : " + currentLevel);
+        rpcTitle.add(rpcText);
+
+
+        //Rankings Panel Changer
+
+        rankingsChangerPanel = new JPanel();
+        JButton goLeft = new JButton("<-");
+        goLeft.addActionListener( e -> {
+
+            if(currentLevel == 1) return;
+            rankingsPanel.remove(rankingsArray.get(currentLevel-1));
+            currentLevel--;
+            rankingsPanel.add(rankingsArray.get(currentLevel-1));
+            rpcText.setText("Top 10 players of level : " + currentLevel);
+            parentFrame.revalidate();
+            parentFrame.repaint();
+        });
+
+        JButton goRight = new JButton("->");
+        goRight.addActionListener( e ->{
+            if(currentLevel == 10) return;
+            rankingsPanel.remove(rankingsArray.get(currentLevel-1));
+            currentLevel++;
+            rankingsPanel.add(rankingsArray.get(currentLevel-1));
+            rpcText.setText("Top 10 players of level : " + currentLevel);
+            parentFrame.revalidate();
+            parentFrame.repaint();
+        });
+
+        rankingsChangerPanel.add(goLeft);
+        rankingsChangerPanel.add(goRight);
+
+
+        //Rankings Panel will be imported from multiple files
+
+        rankingsPanel = new JPanel();
+        rankingsArray = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++){
+
+            try {
+                BufferedReader br = new BufferedReader(new FileReader("data/LevelRankings/Level"+(i+1)+".dat"));
+                ArrayList<String> list = new ArrayList<>();
+                String str;
+                while ((str = br.readLine()) != null){
+                    list.add(str);
+                }
+                Object[][] data = new Object[list.size()][2];
+                for(int j  = 0; j<list.size(); j++){
+                    data[j] = list.get(j).split(";");
+                }
+                Arrays.sort(data, (x,y) -> Integer.compare((int)x[1], (int)y[1]));
+                Object[][] sortedData = new Object[list.size() > 10 ? 10 : list.size()][3];
+                for(int k = 0; k<list.size(); k++){
+                    if(k == 10) break;
+                    sortedData[k][0] = k+1;
+                    sortedData[k][1] = data[k][0];
+                    sortedData[k][2] = data[k][1];
+                }
+
+                String[] coulumnNames = {"Place","Name","Time"};
+                JTable rankingsTable = new JTable(sortedData,coulumnNames);
+                rankingsArray.add(rankingsTable);
+
+            } catch (Exception e){
+                System.out.println(e);
+            }
+
+        }
+
+        rankingsPanel.add(rankingsArray.get(currentLevel-1));
+
+        rankingsWrapper.add(rpcTitle, BorderLayout.NORTH);
+        rankingsWrapper.add(rankingsChangerPanel, BorderLayout.SOUTH);
+        rankingsWrapper.add(rankingsPanel, BorderLayout.CENTER);
+
 
         //Back Button
         backPanel = new BackPanel(parentFrame);
 
         this.add(titlePanel, BorderLayout.NORTH);
+        this.add(rankingsWrapper, BorderLayout.CENTER);
         this.add(backPanel, BorderLayout.SOUTH);
 
 

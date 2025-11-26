@@ -38,44 +38,32 @@ public class PanelManager extends JFrame {
     }
 
     public void panelChange(panelTypes panelToChangeTo){
-
+        this.remove(currentPanel);
     switch (panelToChangeTo){
 
         case MAINMENU -> {
-            this.remove(currentPanel);
             currentPanel = new MenuPanel(this);
-            this.add(currentPanel);
-            this.revalidate();
-            this.repaint();
         }
         case LEVELS -> {
-            this.remove(currentPanel);
             currentPanel = new LevelsPanel(this);
-            this.add(currentPanel);
-            this.revalidate();
-            this.repaint();
         }
         case TUTORIAL -> {
-            this.remove(currentPanel);
             currentPanel = new TutorialPanel(this);
-            this.add(currentPanel);
-            this.revalidate();
-            this.repaint();
         }
         case RANKINGS -> {
-            this.remove(currentPanel);
             currentPanel = new RankingsPanel(this);
-            this.add(currentPanel);
-            this.revalidate();
-            this.repaint();
         }
         case GAME -> {
             return;
         }
 
+
         case null, default -> throw new IllegalArgumentException();
 
     }
+        this.add(currentPanel);
+        this.revalidate();
+        this.repaint();
 
     }
 
