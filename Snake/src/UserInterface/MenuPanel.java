@@ -1,9 +1,10 @@
 package UserInterface;
 
+import UserInterface.BasicComponents.TitlePanel;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.lang.reflect.Parameter;
 
 public class MenuPanel extends JPanel {
 
@@ -18,14 +19,7 @@ public class MenuPanel extends JPanel {
 
 
         //Title Panel
-        titlePanel = new JPanel();
-        titlePanel.setMaximumSize( new Dimension(720,240));
-        titlePanel.setBackground(Color.black);
-        JLabel titleImage = new JLabel();
-        titleImage.setIcon(new ImageIcon("res/Title.png"));
-        titleImage.setMaximumSize(new Dimension(240,149));
-        titlePanel.add(titleImage);
-        titlePanel.setVisible(true);
+        titlePanel = new TitlePanel("res/Title.png", new Dimension(720,240));
 
         //Buttons Panel
         buttonsPanel = new JPanel();

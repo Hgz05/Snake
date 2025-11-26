@@ -49,7 +49,11 @@ public class PanelManager extends JFrame {
             this.repaint();
         }
         case LEVELS -> {
-            return;
+            this.remove(currentPanel);
+            currentPanel = new LevelsPanel(this);
+            this.add(currentPanel);
+            this.revalidate();
+            this.repaint();
         }
         case TUTORIAL -> {
             this.remove(currentPanel);
