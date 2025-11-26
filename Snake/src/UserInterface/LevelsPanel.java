@@ -34,8 +34,9 @@ public class LevelsPanel extends JPanel {
 
             JButton levelButton = new JButton();
             levelButton.setText("Level " + (i+1));
-            levelButton.addActionListener( e -> {
-                //Calling Level starter with the index as a param
+            int finalI = i;
+            levelButton.addActionListener(e -> {
+                parentFrame.gameRun(finalI);
             });
             buttonArray.add(levelButton);
             levelsPanel.add(levelButton);
@@ -44,6 +45,7 @@ public class LevelsPanel extends JPanel {
         //Back Button
         backPanel = new BackPanel(parentFrame);
 
+        this.setPreferredSize(new Dimension(720,720));
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(levelsPanel, BorderLayout.CENTER);
         this.add(backPanel, BorderLayout.SOUTH);

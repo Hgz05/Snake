@@ -1,5 +1,7 @@
 package GameEngine;
 
+import GameEngine.GameObjects.Apple;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 public class Level {
 
     private int levelID;
-    ArrayList<ArrayList<Character>> levelMap;
+    ArrayList<ArrayList<GameObject>> levelMap;
 
     public Level(int level){
         levelID = level;
@@ -20,7 +22,23 @@ public class Level {
             while ((str = br.readLine()) != null){
                 levelMap.add(new ArrayList<>());
                 for (int i = 0; i < 24; i++) {
-                    levelMap.get(lineIt).add(str.charAt(i));
+                    if(str.charAt(i) == 'o'){
+
+                    } else if(str.charAt(i) == 'x'){
+
+
+                    } else if(str.charAt(i) == 'b'){
+
+
+                    } else if(str.charAt(i) == 'w'){
+
+
+                    } else if(str.charAt(i) == 'p'){
+
+
+                    } else if(str.charAt(i) == 'a'){
+                        levelMap.get(lineIt).add(new Apple(lineIt,i));
+                    }
                 }
                 lineIt++;
             }
@@ -28,9 +46,12 @@ public class Level {
 
         } catch (Exception e){
 
-
         }
 
+    }
+
+    public ArrayList<ArrayList<GameObject>> getLevelMap(){
+        return levelMap;
     }
 
 

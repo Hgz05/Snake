@@ -30,6 +30,7 @@ public class PanelManager extends JFrame {
         currentPanel = new MenuPanel(this);
         this.add(currentPanel);
         this.setVisible(true);
+        this.pack();
 
     }
 
@@ -65,6 +66,7 @@ public class PanelManager extends JFrame {
         this.add(currentPanel);
         this.revalidate();
         this.repaint();
+        this.pack();
 
     }
 

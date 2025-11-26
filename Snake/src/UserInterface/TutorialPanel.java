@@ -37,7 +37,7 @@ public class TutorialPanel extends JPanel {
         //Panel for back button
         backPanel = new BackPanel(parentFrame);
 
-
+        this.setPreferredSize(new Dimension(720,720));
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(tutorialField, BorderLayout.CENTER);
         this.add(backPanel, BorderLayout.SOUTH);

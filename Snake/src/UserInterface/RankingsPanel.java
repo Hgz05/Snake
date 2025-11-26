@@ -117,6 +117,7 @@ public class RankingsPanel extends JPanel {
         //Back Button
         backPanel = new BackPanel(parentFrame);
 
+        this.setPreferredSize(new Dimension(720,720));
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(rankingsWrapper, BorderLayout.CENTER);
         this.add(backPanel, BorderLayout.SOUTH);

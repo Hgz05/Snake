@@ -93,6 +93,7 @@ public class MenuPanel extends JPanel {
 
 
         //Adding the panels to the Main Menu panel
+        this.setPreferredSize(new Dimension(720,720));
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(buttonsPanel, BorderLayout.CENTER);
         this.setVisible(true);
