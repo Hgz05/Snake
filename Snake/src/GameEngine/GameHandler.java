@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameHandler {
+public class GameHandler implements Runnable {
 
     private ArrayList<Level> levelArray;
     JFrame mainFrame;
+    Thread gameThread;
+    int selectedLevel;
     public static final int numberOfLevels = 1;
 
     public void setMainFrame(JFrame Frame){
@@ -24,18 +26,44 @@ public class GameHandler {
 
     public void runLevel(int levelToSelect){
 
+        gameThread = new Thread(this);
+        selectedLevel = levelToSelect;
+        gameThread.start();
+
+
+    }
+
+    @Override
+    public void run() {
+
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+
         JPanel levelPanel = new JPanel();
         levelPanel.setLayout(null);
         levelPanel.setPreferredSize(new Dimension(720,720));
-        ArrayList<ArrayList<GameObject>> levelMap = levelArray.get(levelToSelect).getLevelMap();
-        for(int i = 0; i< levelMap.size(); i++){
-            for(int j = 0; j<levelMap.get(i).size(); j++){
-                levelPanel.add(levelMap.get(i).get(j).paintObject());
+        ArrayList<ArrayList<GameObject>> levelMap = levelArray.get(selectedLevel).getLevelMap();
+        for (ArrayList<GameObject> gameObjects : levelMap) {
+            for (GameObject gameObject : gameObjects) {
+                levelPanel.add(gameObject.paintObject());
             }
         }
+
         mainFrame.add(levelPanel);
-        mainFrame.revalidate();
-        mainFrame.repaint();
-        mainFrame.pack();
+        while(gameThread != null){
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / (1000000000/60);
+            lastTime = currentTime;
+
+            if(delta >= 1){
+                mainFrame.revalidate();
+                mainFrame.repaint();
+                mainFrame.pack();
+            }
+        }
+
+
+
     }
 }
