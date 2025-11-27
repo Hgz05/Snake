@@ -11,6 +11,12 @@ public class GameHandler implements Runnable {
     Thread gameThread;
     int selectedLevel;
     public static final int numberOfLevels = 1;
+    int FPS = 10;
+    ArrayList<JLabel> loadedGameObjects = new ArrayList<>();
+    JPanel currentLevelPanel;
+
+    Snake testSnake;
+
 
     public void setMainFrame(JFrame Frame){
         mainFrame = Frame;
@@ -28,6 +34,20 @@ public class GameHandler implements Runnable {
 
         gameThread = new Thread(this);
         selectedLevel = levelToSelect;
+
+        currentLevelPanel = new JPanel();
+        currentLevelPanel.setLayout(null);
+        currentLevelPanel.setPreferredSize(new Dimension(720,720));
+        ArrayList<ArrayList<GameObject>> levelMap = levelArray.get(selectedLevel).getLevelMap();
+        for (ArrayList<GameObject> gameObjects : levelMap) {
+            for (GameObject gameObject : gameObjects) {
+                loadedGameObjects.add(gameObject.paintObject());
+                currentLevelPanel.add(gameObject.paintObject());
+            }
+        }
+        testSnake = new Snake(3, true);
+        currentLevelPanel.add(testSnake.icon);
+        mainFrame.add(currentLevelPanel);
         gameThread.start();
 
 
@@ -39,27 +59,18 @@ public class GameHandler implements Runnable {
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
-
-        JPanel levelPanel = new JPanel();
-        levelPanel.setLayout(null);
-        levelPanel.setPreferredSize(new Dimension(720,720));
-        ArrayList<ArrayList<GameObject>> levelMap = levelArray.get(selectedLevel).getLevelMap();
-        for (ArrayList<GameObject> gameObjects : levelMap) {
-            for (GameObject gameObject : gameObjects) {
-                levelPanel.add(gameObject.paintObject());
-            }
-        }
-
-        mainFrame.add(levelPanel);
         while(gameThread != null){
             currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / (1000000000/60);
+            delta += (currentTime - lastTime) / ((double) 1000000000 /FPS);
             lastTime = currentTime;
+
 
             if(delta >= 1){
                 mainFrame.revalidate();
                 mainFrame.repaint();
                 mainFrame.pack();
+                delta--;
+                testSnake.setPos(Snake.directions.UP);
             }
         }
 

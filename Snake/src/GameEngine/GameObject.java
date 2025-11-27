@@ -18,6 +18,7 @@ public class GameObject {
 
         gameObject = new JLabel();
         gameObject.setBounds(posX,posY,30,30);
+        gameObject.setIcon(new ImageIcon("res/SnakeIcon.png"));
 
     }
 

@@ -23,7 +23,7 @@ public class Level {
                 levelMap.add(new ArrayList<>());
                 for (int i = 0; i < 24; i++) {
                     if(str.charAt(i) == 'o'){
-
+                    continue;
                     } else if(str.charAt(i) == 'x'){
 
 
