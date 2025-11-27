@@ -57,7 +57,7 @@ public class Snake {
                     posRow = 24;
 
                 } else {
-                    posY -= 3;
+                    posY -= velocity;
                 }
 
             }
@@ -73,7 +73,7 @@ public class Snake {
                     posRow = 1;
 
                 } else {
-                    posY += 3;
+                    posY += velocity;
                 }
 
             }
@@ -89,7 +89,7 @@ public class Snake {
                     posColumn = 24;
 
                 } else {
-                    posX -= 3;
+                    posX -= velocity;
                 }
 
             }
@@ -105,13 +105,19 @@ public class Snake {
                     posColumn = 1;
 
                 } else {
-                    posX += 3;
+                    posX += velocity;
                 }
 
             }
 
         }
         icon.setBounds(posX,posY,30,30);
+
+    }
+
+    public void setDirection(directions dir){
+
+        currentlyFacing = dir;
 
     }
 

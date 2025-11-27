@@ -11,11 +11,11 @@ public class GameHandler implements Runnable {
     Thread gameThread;
     int selectedLevel;
     public static final int numberOfLevels = 1;
-    int FPS = 10;
+    int FPS = 6;
     ArrayList<JLabel> loadedGameObjects = new ArrayList<>();
     JPanel currentLevelPanel;
 
-    Snake testSnake;
+    static Snake testSnake;
     KeyHandler keyboardInput = new KeyHandler();
 
 
@@ -46,7 +46,7 @@ public class GameHandler implements Runnable {
                 currentLevelPanel.add(gameObject.paintObject());
             }
         }
-        testSnake = new Snake(3, true);
+        testSnake = new Snake(30, true);
         currentLevelPanel.add(testSnake.icon);
         mainFrame.add(currentLevelPanel);
         currentLevelPanel.addKeyListener(keyboardInput);
@@ -68,16 +68,16 @@ public class GameHandler implements Runnable {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / ((double) 1000000000 /FPS);
             lastTime = currentTime;
+            //PollKeyboardinput
 
 
             if(delta >= 1){
 
-                evaluateKeyBoardInput();
                 testSnake.setPos(testSnake.currentlyFacing);
                 mainFrame.revalidate();
                 mainFrame.repaint();
                 mainFrame.pack();
-                delta--;
+                delta = 0;
 
             }
         }
@@ -86,18 +86,12 @@ public class GameHandler implements Runnable {
 
     }
 
-    private void evaluateKeyBoardInput(){
+    public static Snake getCurrentSnake(){
 
-        if(keyboardInput.keyUp){
-            testSnake.currentlyFacing = Snake.directions.UP;
-        } else if(keyboardInput.keyDown){
-            testSnake.currentlyFacing = Snake.directions.DOWN;
-        } else if(keyboardInput.keyLeft){
-            testSnake.currentlyFacing = Snake.directions.LEFT;
-        } else if (keyboardInput.keyRight) {
-            testSnake.currentlyFacing = Snake.directions.RIGHT;
-        }
+        return testSnake;
 
     }
+
+
 
 }
