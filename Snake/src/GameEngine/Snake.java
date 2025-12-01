@@ -10,11 +10,14 @@ public class Snake {
         RIGHT
     }
     directions currentlyFacing = directions.UP;
+    directions prevFacing = directions.UP;
     int velocity = 3;
     int posX = 330;
     int posY = 330;
     int posRow = 11;
     int posColumn = 11;
+    int prevColumn = 11;
+    int prevRow = 11;
     JLabel icon;
     boolean isBorderOff;
 
@@ -52,11 +55,16 @@ public class Snake {
                     //Kill snake
 
                 } else if(posY <= 0 && isBorderOff){
-
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posY = 690;
                     posRow = 23;
 
                 } else {
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posY -= velocity;
                     posRow--;
                 }
@@ -69,11 +77,16 @@ public class Snake {
                     //Kill Snake
 
                 } else if(posY >= 720 && isBorderOff){
-
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posY = 0;
                     posRow = 0;
 
                 } else {
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posY += velocity;
                     posRow++;
                 }
@@ -86,11 +99,16 @@ public class Snake {
                     //Kill Snake
 
                 } else if (posX <= 0 && isBorderOff) {
-
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posX = 690;
                     posColumn = 23;
 
                 } else {
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posX -= velocity;
                     posColumn--;
                 }
@@ -103,11 +121,16 @@ public class Snake {
                     //Kill Snake
 
                 } else if(posX >= 720 && isBorderOff){
-
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posX = 0;
                     posColumn = 0;
 
                 } else {
+                    prevFacing = currentlyFacing;
+                    prevColumn = posColumn;
+                    prevRow = posRow;
                     posX += velocity;
                     posColumn++;
                 }

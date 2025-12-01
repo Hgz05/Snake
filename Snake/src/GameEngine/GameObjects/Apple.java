@@ -18,6 +18,7 @@ public class Apple extends GameObject {
     public void interactionBehaviour(Snake playerSnake, GameHandler currentGame) {
 
         currentGame.setApplesRemain();
+        currentGame.addSnakeBody();
         currentGame.removeObject(this);
 
     }

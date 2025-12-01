@@ -20,6 +20,7 @@ public class GameHandler implements Runnable {
     JPanel currentLevelPanel;
 
     static Snake playerSnake;
+    static ArrayList<Snake> snakeArray = new ArrayList<>();
     int applesRemain = 0;
     KeyHandler keyboardInput = new KeyHandler();
 
@@ -54,6 +55,7 @@ public class GameHandler implements Runnable {
             }
         }
         playerSnake = new Snake(30, true);
+        snakeArray.add(playerSnake);
         currentLevelPanel.add(playerSnake.icon);
         mainFrame.add(currentLevelPanel);
         currentLevelPanel.addKeyListener(keyboardInput);
@@ -78,8 +80,10 @@ public class GameHandler implements Runnable {
 
 
             if(delta >= 1){
-
                 playerSnake.setPos(playerSnake.currentlyFacing);
+                for(int i = 1; i<snakeArray.size(); i++){
+                    snakeArray.get(i).setPos(snakeArray.get(i-1).prevFacing);
+                }
                 this.collisionCheck();
                 mainFrame.revalidate();
                 mainFrame.repaint();
@@ -102,10 +106,9 @@ public class GameHandler implements Runnable {
 
     private void collisionCheck(){
 
-        for (Iterator<GameObject> it = loadedGameObjects.iterator(); it.hasNext();){
-            GameObject currentObject = it.next(); //Exception if object deleted
-
-            if(currentObject.comparePosition(playerSnake.posColumn, playerSnake.posRow)){
+        //Exception if object deleted
+        for (GameObject currentObject : loadedGameObjects) {
+            if (currentObject.comparePosition(playerSnake.posColumn, playerSnake.posRow)) {
 
                 currentObject.interactionBehaviour(playerSnake, this);
                 break;
@@ -125,6 +128,12 @@ public class GameHandler implements Runnable {
         loadedJLabelGameObjects.remove(objectToRemove.paintObject());
         loadedGameObjects.remove(objectToRemove);
 
+    }
+
+    public void addSnakeBody(){
+        Snake bodyToAdd = new SnakeBody(snakeArray.getLast());
+        snakeArray.add(bodyToAdd);
+        currentLevelPanel.add(bodyToAdd.icon);
     }
 
 
