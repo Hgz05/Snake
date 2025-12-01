@@ -1,6 +1,8 @@
 package GameEngine;
 
 import GameEngine.GameObjects.Apple;
+import UserInterface.MenuPanel;
+import UserInterface.PanelManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,24 +11,24 @@ import java.util.ArrayList;
 public class GameHandler implements Runnable {
 
     private ArrayList<Level> levelArray;
-    JFrame mainFrame;
+    PanelManager mainFrame;
     Thread gameThread;
     static boolean threadRunning;
 
     int selectedLevel;
     public static final int numberOfLevels = 2; //Change later
     int FPS = 6;
-    ArrayList<GameObject> loadedGameObjects = new ArrayList<>();
-    ArrayList<JLabel> loadedJLabelGameObjects = new ArrayList<>();
+    ArrayList<GameObject> loadedGameObjects;
+    ArrayList<JLabel> loadedJLabelGameObjects;
     JPanel currentLevelPanel;
 
     static Snake playerSnake;
-    static ArrayList<Snake> snakeArray = new ArrayList<>();
+    static ArrayList<Snake> snakeArray;
     int applesRemain = 0;
     KeyHandler keyboardInput = new KeyHandler();
 
 
-    public void setMainFrame(JFrame Frame){
+    public void setMainFrame(PanelManager Frame){
         mainFrame = Frame;
     }
     public GameHandler(){
@@ -41,6 +43,9 @@ public class GameHandler implements Runnable {
     public void runLevel(int levelToSelect){
 
         gameThread = new Thread(this);
+        loadedGameObjects = new ArrayList<>();
+        loadedJLabelGameObjects = new ArrayList<>();
+        snakeArray = new ArrayList<>();
         selectedLevel = levelToSelect;
 
         currentLevelPanel = new JPanel();
@@ -94,14 +99,20 @@ public class GameHandler implements Runnable {
                 mainFrame.revalidate();
                 mainFrame.repaint();
                 mainFrame.pack();
-                if(applesRemain == 0) return;
+                if(applesRemain == 0){
+                    //Write stats back to leaderboards and unlock new level
+                }
                 delta = 0;
 
             }
         }
 
         //Game Ended
-
+        mainFrame.remove(currentLevelPanel);
+        mainFrame.add(mainFrame.setCurrentPanel(new MenuPanel(mainFrame)));
+        mainFrame.revalidate();
+        mainFrame.repaint();
+        mainFrame.pack();
 
 
     }

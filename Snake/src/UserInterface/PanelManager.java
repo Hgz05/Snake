@@ -9,6 +9,7 @@ public class PanelManager extends JFrame {
 
     private JPanel currentPanel;
     private GameHandler game;
+    static String playerName;
     public enum panelTypes{
 
         MAINMENU,
@@ -75,6 +76,11 @@ public class PanelManager extends JFrame {
         this.remove(currentPanel);
         game.runLevel(i);
 
+    }
+
+    public JPanel setCurrentPanel(JPanel panelToSet){
+        currentPanel = panelToSet;
+        return currentPanel;
     }
 
 }

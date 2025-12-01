@@ -23,7 +23,19 @@ public class LevelsPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         //Title Panel
-        titlePanel = new TitlePanel("res/Placeholder.jpg", new Dimension(720,240));
+        titlePanel = new JPanel();
+        titlePanel.setBackground(Color.black);
+        JPanel textPanel = new JPanel(new BorderLayout());
+        JLabel nameLabel = new JLabel("Player Name:");
+        nameLabel.setPreferredSize(new Dimension(180,20));
+        textPanel.setPreferredSize(new Dimension(180,100));
+        JTextField userInput = new JTextField(80);
+        userInput.setFont(new Font("Arial", Font.PLAIN,24));
+        userInput.setMargin(new Insets(5,10,5,10));
+        userInput.addActionListener( e -> PanelManager.playerName = userInput.getText());
+        textPanel.add(nameLabel, BorderLayout.NORTH);
+        textPanel.add(userInput, BorderLayout.CENTER);
+        titlePanel.add(textPanel);
 
         //Menu Table
         levelsPanel = new JPanel(new GridLayout(3,4, 10,10));
