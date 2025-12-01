@@ -68,7 +68,6 @@ public class GameHandler implements Runnable {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / ((double) 1000000000 /FPS);
             lastTime = currentTime;
-            //PollKeyboardinput
 
 
             if(delta >= 1){
