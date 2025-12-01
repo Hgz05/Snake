@@ -5,6 +5,7 @@ import GameEngine.GameObjects.Apple;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GameHandler implements Runnable {
 
@@ -83,6 +84,7 @@ public class GameHandler implements Runnable {
                 mainFrame.revalidate();
                 mainFrame.repaint();
                 mainFrame.pack();
+                if(applesRemain == 0) return;
                 delta = 0;
 
             }
@@ -100,12 +102,13 @@ public class GameHandler implements Runnable {
 
     private void collisionCheck(){
 
-        for (GameObject currentObject : loadedGameObjects){
+        for (Iterator<GameObject> it = loadedGameObjects.iterator(); it.hasNext();){
+            GameObject currentObject = it.next(); //Exception if object deleted
 
             if(currentObject.comparePosition(playerSnake.posColumn, playerSnake.posRow)){
 
                 currentObject.interactionBehaviour(playerSnake, this);
-
+                break;
             }
 
         }

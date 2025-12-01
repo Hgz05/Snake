@@ -11,8 +11,8 @@ public abstract class GameObject {
     protected JLabel gameObject;
 
     public GameObject(int row, int column){
-        posX = row*30;
-        posY = column*30;
+        posX = column*30;
+        posY = row*30;
         posRow = row;
         posColumn = column;
 
