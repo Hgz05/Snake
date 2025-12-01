@@ -5,13 +5,14 @@ import GameEngine.GameObjects.Apple;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class GameHandler implements Runnable {
 
     private ArrayList<Level> levelArray;
     JFrame mainFrame;
     Thread gameThread;
+    static boolean threadRunning;
+
     int selectedLevel;
     public static final int numberOfLevels = 2; //Change later
     int FPS = 6;
@@ -54,7 +55,7 @@ public class GameHandler implements Runnable {
                 currentLevelPanel.add(gameObject.paintObject());
             }
         }
-        playerSnake = new Snake(30, true);
+        playerSnake = new Snake(30, false);
         snakeArray.add(playerSnake);
         currentLevelPanel.add(playerSnake.icon);
         mainFrame.add(currentLevelPanel);
@@ -68,12 +69,12 @@ public class GameHandler implements Runnable {
 
     @Override
     public void run() {
-
+        threadRunning = true;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
         playerSnake.setPos(Snake.directions.UP);
-        while(gameThread != null){
+        while(threadRunning){
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / ((double) 1000000000 /FPS);
             lastTime = currentTime;
@@ -83,6 +84,11 @@ public class GameHandler implements Runnable {
                 playerSnake.setPos(playerSnake.currentlyFacing);
                 for(int i = 1; i<snakeArray.size(); i++){
                     snakeArray.get(i).setPos(snakeArray.get(i-1).prevFacing);
+                    //Snake collided with itself
+                    if(snakeArray.get(i).comparePosition(playerSnake.posColumn,playerSnake.posRow)) {
+                        threadRunning = false;
+                        break;
+                    }
                 }
                 this.collisionCheck();
                 mainFrame.revalidate();
@@ -93,6 +99,8 @@ public class GameHandler implements Runnable {
 
             }
         }
+
+        //Game Ended
 
 
 

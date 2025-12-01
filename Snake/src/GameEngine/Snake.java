@@ -52,7 +52,7 @@ public class Snake {
 
                 if(posY <= 0 && !isBorderOff){
 
-                    //Kill snake
+                    GameHandler.threadRunning = false;
 
                 } else if(posY <= 0 && isBorderOff){
                     prevFacing = currentlyFacing;
@@ -72,11 +72,11 @@ public class Snake {
             }
             case DOWN -> {
 
-                if(posY >= 720 && !isBorderOff){
+                if(posY >= 690 && !isBorderOff){
 
-                    //Kill Snake
+                    GameHandler.threadRunning = false;
 
-                } else if(posY >= 720 && isBorderOff){
+                } else if(posY >= 690 && isBorderOff){
                     prevFacing = currentlyFacing;
                     prevColumn = posColumn;
                     prevRow = posRow;
@@ -96,7 +96,7 @@ public class Snake {
 
                 if(posX <= 0 && !isBorderOff){
 
-                    //Kill Snake
+                    GameHandler.threadRunning = false;
 
                 } else if (posX <= 0 && isBorderOff) {
                     prevFacing = currentlyFacing;
@@ -116,11 +116,11 @@ public class Snake {
             }
             case RIGHT ->{
 
-                if(posX >= 720 && !isBorderOff){
+                if(posX >= 690 && !isBorderOff){
 
-                    //Kill Snake
+                    GameHandler.threadRunning = false;
 
-                } else if(posX >= 720 && isBorderOff){
+                } else if(posX >= 690 && isBorderOff){
                     prevFacing = currentlyFacing;
                     prevColumn = posColumn;
                     prevRow = posRow;
@@ -146,6 +146,10 @@ public class Snake {
 
         currentlyFacing = dir;
 
+    }
+
+    public boolean comparePosition(int col, int row){
+        return col == posColumn && row == posRow;
     }
 
 }
