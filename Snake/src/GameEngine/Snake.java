@@ -13,8 +13,8 @@ public class Snake {
     int velocity = 3;
     int posX = 330;
     int posY = 330;
-    int posRow = 12;
-    int posColumn = 12;
+    int posRow = 11;
+    int posColumn = 11;
     JLabel icon;
     boolean isBorderOff;
 
@@ -54,10 +54,11 @@ public class Snake {
                 } else if(posY <= 0 && isBorderOff){
 
                     posY = 690;
-                    posRow = 24;
+                    posRow = 23;
 
                 } else {
                     posY -= velocity;
+                    posRow--;
                 }
 
             }
@@ -70,10 +71,11 @@ public class Snake {
                 } else if(posY >= 720 && isBorderOff){
 
                     posY = 0;
-                    posRow = 1;
+                    posRow = 0;
 
                 } else {
                     posY += velocity;
+                    posRow++;
                 }
 
             }
@@ -86,10 +88,11 @@ public class Snake {
                 } else if (posX <= 0 && isBorderOff) {
 
                     posX = 690;
-                    posColumn = 24;
+                    posColumn = 23;
 
                 } else {
                     posX -= velocity;
+                    posColumn--;
                 }
 
             }
@@ -102,10 +105,11 @@ public class Snake {
                 } else if(posX >= 720 && isBorderOff){
 
                     posX = 0;
-                    posColumn = 1;
+                    posColumn = 0;
 
                 } else {
                     posX += velocity;
+                    posColumn++;
                 }
 
             }

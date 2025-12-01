@@ -1,5 +1,7 @@
 package GameEngine;
 
+import GameEngine.GameObjects.Apple;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,12 +12,14 @@ public class GameHandler implements Runnable {
     JFrame mainFrame;
     Thread gameThread;
     int selectedLevel;
-    public static final int numberOfLevels = 1;
+    public static final int numberOfLevels = 2; //Change later
     int FPS = 6;
-    ArrayList<JLabel> loadedGameObjects = new ArrayList<>();
+    ArrayList<GameObject> loadedGameObjects = new ArrayList<>();
+    ArrayList<JLabel> loadedJLabelGameObjects = new ArrayList<>();
     JPanel currentLevelPanel;
 
-    static Snake testSnake;
+    static Snake playerSnake;
+    int applesRemain = 0;
     KeyHandler keyboardInput = new KeyHandler();
 
 
@@ -42,12 +46,14 @@ public class GameHandler implements Runnable {
         ArrayList<ArrayList<GameObject>> levelMap = levelArray.get(selectedLevel).getLevelMap();
         for (ArrayList<GameObject> gameObjects : levelMap) {
             for (GameObject gameObject : gameObjects) {
-                loadedGameObjects.add(gameObject.paintObject());
+                if(gameObject.getClass() == Apple.class) applesRemain++;
+                loadedGameObjects.add(gameObject);
+                loadedJLabelGameObjects.add(gameObject.paintObject());
                 currentLevelPanel.add(gameObject.paintObject());
             }
         }
-        testSnake = new Snake(30, true);
-        currentLevelPanel.add(testSnake.icon);
+        playerSnake = new Snake(30, true);
+        currentLevelPanel.add(playerSnake.icon);
         mainFrame.add(currentLevelPanel);
         currentLevelPanel.addKeyListener(keyboardInput);
         currentLevelPanel.setFocusable(true);
@@ -63,7 +69,7 @@ public class GameHandler implements Runnable {
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
-        testSnake.setPos(Snake.directions.UP);
+        playerSnake.setPos(Snake.directions.UP);
         while(gameThread != null){
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / ((double) 1000000000 /FPS);
@@ -72,7 +78,8 @@ public class GameHandler implements Runnable {
 
             if(delta >= 1){
 
-                testSnake.setPos(testSnake.currentlyFacing);
+                playerSnake.setPos(playerSnake.currentlyFacing);
+                this.collisionCheck();
                 mainFrame.revalidate();
                 mainFrame.repaint();
                 mainFrame.pack();
@@ -87,7 +94,33 @@ public class GameHandler implements Runnable {
 
     public static Snake getCurrentSnake(){
 
-        return testSnake;
+        return playerSnake;
+
+    }
+
+    private void collisionCheck(){
+
+        for (GameObject currentObject : loadedGameObjects){
+
+            if(currentObject.comparePosition(playerSnake.posColumn, playerSnake.posRow)){
+
+                currentObject.interactionBehaviour(playerSnake, this);
+
+            }
+
+        }
+
+    }
+
+    public void setApplesRemain(){
+        applesRemain--;
+    }
+
+    public void removeObject(GameObject objectToRemove){
+
+        currentLevelPanel.remove(objectToRemove.paintObject());
+        loadedJLabelGameObjects.remove(objectToRemove.paintObject());
+        loadedGameObjects.remove(objectToRemove);
 
     }
 

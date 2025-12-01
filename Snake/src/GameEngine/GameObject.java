@@ -3,7 +3,7 @@ package GameEngine;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameObject {
+public abstract class GameObject {
     int posX;
     int posY;
     int posRow;
@@ -25,5 +25,13 @@ public class GameObject {
     public JLabel paintObject(){
         return gameObject;
     }
+
+    public boolean comparePosition(int col, int row){
+        return col == posColumn && row == posRow;
+    }
+
+
+    public abstract void interactionBehaviour(Snake playerSnake, GameHandler currentGame);
+
 
 }
