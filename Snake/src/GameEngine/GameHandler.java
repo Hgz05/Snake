@@ -166,16 +166,25 @@ public class GameHandler implements Runnable {
     public void addRecord(int time){
 
         try {
-
             BufferedWriter bw = new BufferedWriter(new FileWriter("data/LevelRankings/Level"+(selectedLevel+1)+".dat", true));
             bw.write(PanelManager.playerName + ";" + time + "\n");
             bw.close();
 
-        } catch (Exception e){
-
-
-        }
+        } catch (Exception e){}
 
     }
+
+
+    public static void setThreadRunning(boolean bool){
+        threadRunning = bool;
+    }
+
+    public ArrayList<GameObject> getLoadedGameObjects(){
+        return loadedGameObjects;
+    }
+    public ArrayList<Snake> getSnakeArray(){
+        return snakeArray;
+    }
+
 
 }

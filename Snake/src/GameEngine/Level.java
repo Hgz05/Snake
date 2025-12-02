@@ -1,6 +1,6 @@
 package GameEngine;
 
-import GameEngine.GameObjects.Apple;
+import GameEngine.GameObjects.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,20 +24,21 @@ public class Level {
                 for (int i = 0; i < 24; i++) {
                     if(str.charAt(i) == 'o'){
                     continue;
-                    } else if(str.charAt(i) == 'x'){
-
+                    } else if(str.charAt(i) == 's'){
+                        levelMap.get(lineIt).add(new Spike(lineIt,i));
 
                     } else if(str.charAt(i) == 'b'){
-
+                        levelMap.get(lineIt).add(new Button(lineIt,i));
 
                     } else if(str.charAt(i) == 'w'){
-
+                        levelMap.get(lineIt).add(new Wall(lineIt,i));
 
                     } else if(str.charAt(i) == 'p'){
-
+                        levelMap.get(lineIt).add(new PoisonApple(lineIt,i));
 
                     } else if(str.charAt(i) == 'a'){
                         levelMap.get(lineIt).add(new Apple(lineIt,i));
+
                     }
                 }
                 lineIt++;

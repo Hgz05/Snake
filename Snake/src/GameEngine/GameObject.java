@@ -6,8 +6,8 @@ import java.awt.*;
 public abstract class GameObject {
     int posX;
     int posY;
-    int posRow;
-    int posColumn;
+    protected int posRow;
+    protected int posColumn;
     protected JLabel gameObject;
 
     public GameObject(int row, int column){
