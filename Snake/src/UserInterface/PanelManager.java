@@ -9,9 +9,8 @@ public class PanelManager extends JFrame {
 
     private JPanel currentPanel;
     private GameHandler game;
-    static String playerName;
+    public static String playerName;
     public enum panelTypes{
-
         MAINMENU,
         LEVELS,
         TUTORIAL,

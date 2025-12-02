@@ -43,6 +43,8 @@ public class Level {
                 lineIt++;
             }
 
+            br.close();
+
 
         } catch (Exception e){
 

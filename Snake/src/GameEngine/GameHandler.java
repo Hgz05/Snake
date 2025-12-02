@@ -6,6 +6,10 @@ import UserInterface.PanelManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class GameHandler implements Runnable {
@@ -16,7 +20,7 @@ public class GameHandler implements Runnable {
     static boolean threadRunning;
 
     int selectedLevel;
-    public static final int numberOfLevels = 2; //Change later
+    public static final int numberOfLevels = 3; //Change later
     int FPS = 6;
     ArrayList<GameObject> loadedGameObjects;
     ArrayList<JLabel> loadedJLabelGameObjects;
@@ -60,7 +64,7 @@ public class GameHandler implements Runnable {
                 currentLevelPanel.add(gameObject.paintObject());
             }
         }
-        playerSnake = new Snake(30, false);
+        playerSnake = new Snake(30, true);
         snakeArray.add(playerSnake);
         currentLevelPanel.add(playerSnake.icon);
         mainFrame.add(currentLevelPanel);
@@ -76,6 +80,7 @@ public class GameHandler implements Runnable {
     public void run() {
         threadRunning = true;
         double delta = 0;
+        long startingTime = System.nanoTime();
         long lastTime = System.nanoTime();
         long currentTime;
         playerSnake.setPos(Snake.directions.UP);
@@ -100,6 +105,9 @@ public class GameHandler implements Runnable {
                 mainFrame.repaint();
                 mainFrame.pack();
                 if(applesRemain == 0){
+                    int compleationTime =(int)((currentTime - startingTime) / 1000000000);
+                    threadRunning = false;
+                    addRecord(compleationTime);
                     //Write stats back to leaderboards and unlock new level
                 }
                 delta = 0;
@@ -155,6 +163,19 @@ public class GameHandler implements Runnable {
         currentLevelPanel.add(bodyToAdd.icon);
     }
 
+    public void addRecord(int time){
 
+        try {
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter("data/LevelRankings/Level"+(selectedLevel+1)+".dat", true));
+            bw.write(PanelManager.playerName + ";" + time + "\n");
+            bw.close();
+
+        } catch (Exception e){
+
+
+        }
+
+    }
 
 }
