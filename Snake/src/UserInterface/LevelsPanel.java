@@ -2,7 +2,6 @@ package UserInterface;
 
 import GameEngine.GameHandler;
 import UserInterface.BasicComponents.BackPanel;
-import UserInterface.BasicComponents.TitlePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,6 +57,7 @@ public class LevelsPanel extends JPanel {
         //Back Button
         backPanel = new BackPanel(parentFrame);
         backPanel.setSize(360, 120);
+
         //Walls Button
         JPanel wallPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton wallButton = new JButton();
@@ -78,10 +78,35 @@ public class LevelsPanel extends JPanel {
         wallPanel.setBackground(Color.black);
         wallPanel.setPreferredSize(new Dimension(360,120));
 
+        //Difficulty Button
+        JPanel difficultyPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton difficultyButton = new JButton();
+        difficultyButton.setPreferredSize(new Dimension(96,64));
+        difficultyButton.setText(diffGet());
+        difficultyButton.addActionListener( e -> {
+
+            if(GameHandler.FPS == 6){
+                GameHandler.FPS = 12;
+                difficultyButton.setText(diffGet());
+            } else if(GameHandler.FPS == 12){
+                GameHandler.FPS = 24;
+                difficultyButton.setText(diffGet());
+            } else if(GameHandler.FPS == 24){
+                GameHandler.FPS = 6;
+                difficultyButton.setText(diffGet());
+            }
+
+        });
+        difficultyPanel.setBackground(Color.black);
+        difficultyPanel.add(difficultyButton);
+        difficultyPanel.add(Box.createVerticalStrut(50));
+
+
         //Wrapper Panel
         JPanel wrapper = new JPanel();
         wrapper.add(backPanel);
         wrapper.add(wallPanel);
+        wrapper.add(difficultyPanel);
         wrapper.setBackground(Color.black);
 
         this.setPreferredSize(new Dimension(720,720));
@@ -89,6 +114,17 @@ public class LevelsPanel extends JPanel {
         this.add(levelsPanel, BorderLayout.CENTER);
         this.add(wrapper, BorderLayout.SOUTH);
 
+    }
+
+    private String diffGet(){
+        if(GameHandler.FPS == 6) {
+            return "Normal";
+        } else if(GameHandler.FPS == 12){
+            return "Hard";
+        } else if(GameHandler.FPS == 24){
+            return "Very Hard";
+        }
+        return "";
     }
 
 

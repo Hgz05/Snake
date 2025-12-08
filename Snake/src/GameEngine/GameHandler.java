@@ -19,7 +19,7 @@ public class GameHandler implements Runnable {
 
     int selectedLevel;
     public static final int numberOfLevels = 3; //Change later
-    int FPS = 6;
+    public static int FPS = 6;
     ArrayList<GameObject> loadedGameObjects;
     ArrayList<JLabel> loadedJLabelGameObjects;
     JPanel currentLevelPanel;
