@@ -103,7 +103,7 @@ public class GameHandler implements Runnable {
      *                      This function will prepare the game startup and will load the game objects, evaluate game rules and start the game thread
      */
     public void runLevel(int levelToSelect){
-
+        applesRemain = 0;
         gameThread = new Thread(this);
         loadedGameObjects = new ArrayList<>();
         loadedJLabelGameObjects = new ArrayList<>();
