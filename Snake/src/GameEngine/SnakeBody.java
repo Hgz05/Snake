@@ -2,15 +2,29 @@ package GameEngine;
 
 import javax.swing.*;
 
+/**
+ * This class is a child of the Snake class and it represents a body part of the snake
+ */
 public class SnakeBody extends Snake {
 
+    /**
+     * The previous part of the snake. E.g. the head if "this" is the second part
+     */
     Snake prevPart;
 
 
+    /**
+     * @param vel Velocity
+     * @param border Border rule
+     * This is a default constructor (Not used)
+     */
     public SnakeBody(int vel, boolean border) {
         super(vel, border);
     }
 
+    /**
+     * @param previousPart The reference to the previous part
+     */
     public SnakeBody(Snake previousPart){
         super(previousPart.velocity,previousPart.isBorderOff);
         posX = previousPart.prevColumn*30;
@@ -30,6 +44,10 @@ public class SnakeBody extends Snake {
 
     }
 
+    /**
+     * @param dir Currently facing direction
+     * This function sets the image of the snake in the currently facing direction
+     */
     @Override
     public void setIcon(directions dir) {
         switch (dir){
@@ -37,6 +55,10 @@ public class SnakeBody extends Snake {
         }
     }
 
+    /**
+     * @param dir The direction the snake will be going
+     * This function will set "this" part's direction to the previous part's direction.
+     */
     @Override
     public void setPos(directions dir){
         setIcon(dir);

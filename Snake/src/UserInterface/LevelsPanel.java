@@ -7,16 +7,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This Class displays the level panel
+ */
 public class LevelsPanel extends JPanel {
 
+    /**
+     * Display frame
+     */
     PanelManager parentFrame;
+    /**
+     * The title of the panel
+     */
     JPanel titlePanel;
+    /**
+     * This panel displays the level options in a grid
+     */
     JPanel levelsPanel;
+    /**
+     * This panel has the back button to the main menu
+     */
     JPanel backPanel;
+    /**
+     * This array contains all the buttons that lead to a level
+     */
     ArrayList<JButton> buttonArray;
 
 
-
+    /**
+     * @param Frame This will be the parent frame
+     */
     public LevelsPanel(PanelManager Frame){
 
         parentFrame = Frame;
@@ -116,13 +136,17 @@ public class LevelsPanel extends JPanel {
 
     }
 
+    /**
+     * @return Returns a string which represents the difficulty level of the desired value
+     * This method determines the difficulty level calculated from the FPS and returns a string
+     */
     private String diffGet(){
         if(GameHandler.FPS == 6) {
             return "Normal";
         } else if(GameHandler.FPS == 12){
             return "Hard";
         } else if(GameHandler.FPS == 24){
-            return "Very Hard";
+            return "Impossible";
         }
         return "";
     }

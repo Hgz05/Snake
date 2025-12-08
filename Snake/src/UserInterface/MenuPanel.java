@@ -6,12 +6,27 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * This is the main menu for the game
+ */
 public class MenuPanel extends JPanel {
 
+    /**
+     * Display frame
+     */
     PanelManager parentFrame;
+    /**
+     * The title of the panel
+     */
     JPanel titlePanel;
+    /**
+     * This panel contains the buttons where the user can change to other menu panels or exit the application
+     */
     JPanel buttonsPanel;
 
+    /**
+     * @param Frame This will be the parent frame
+     */
     public MenuPanel(PanelManager Frame){
         //Main Menu Panel
         this.setLayout(new BorderLayout());

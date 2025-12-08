@@ -10,16 +10,43 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This is a Class that displays the rankings
+ */
 public class RankingsPanel extends JPanel {
 
+    /**
+     * Display Frame
+     */
     PanelManager parentFrame;
+    /**
+     * This panel displays the title
+     */
     JPanel titlePanel;
+    /**
+     * This panel contains the buttons that will change the rankings table
+     */
     JPanel rankingsChangerPanel;
+    /**
+     * This is the panel that contains the rankings table
+     */
     JPanel rankingsPanel;
+    /**
+     * This panel contains the button to the main menu
+     */
     JPanel backPanel;
+    /**
+     * This table contains the rankings information
+     */
     ArrayList<JTable> rankingsArray;
+    /**
+     * This is the id of the current level rankings displayed
+     */
     int currentLevel = 1;
 
+    /**
+     * @param Frame This will be the parent frame
+     */
     public RankingsPanel(PanelManager Frame){
 
         parentFrame = Frame;
@@ -117,6 +144,7 @@ public class RankingsPanel extends JPanel {
         //Back Button
         backPanel = new BackPanel(parentFrame);
 
+        //Adding panels back to the frame
         this.setPreferredSize(new Dimension(720,720));
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(rankingsWrapper, BorderLayout.CENTER);

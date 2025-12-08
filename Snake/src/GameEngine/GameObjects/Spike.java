@@ -6,9 +6,19 @@ import GameEngine.Snake;
 
 import javax.swing.*;
 
+/**
+ * Spike GameObject
+ */
 public class Spike extends GameObject {
+    /**
+     * Determines if the spike position is up
+     */
     boolean isUp;
 
+    /**
+     * @param row row position
+     * @param column column position
+     */
     public Spike(int row, int column){
         super(row, column);
         isUp = false;
@@ -16,6 +26,12 @@ public class Spike extends GameObject {
 
     }
 
+    /**
+     * @param playerSnake the player snake
+     * @param currentGame the game handler (currently running game session)
+     *                    This function will handle the interaction with the player and it's outcome
+     *                    If the snake is on a spike whe a spike gets up the snake will die and the game will end
+     */
     @Override
     public void interactionBehaviour(Snake playerSnake, GameHandler currentGame) {
         if(isUp){
@@ -23,6 +39,10 @@ public class Spike extends GameObject {
         }
     }
 
+    /**
+     * @param currentGame current game session
+     *                    Sets the spike position to it's opposite
+     */
     public void setSpike(GameHandler currentGame){
         if(!isUp){
             isUp = true;

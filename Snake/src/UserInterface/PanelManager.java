@@ -5,11 +5,27 @@ import GameEngine.GameHandler;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This is the Class that manages all the menus
+ */
 public class PanelManager extends JFrame {
 
+    /**
+     * Current "Panel" menu selected
+     */
     private JPanel currentPanel;
+    /**
+     * The class that handles the game logic
+     */
     private GameHandler game;
+    /**
+     * Name of the player
+     */
     public static String playerName;
+
+    /**
+     * An enum for storing panel types
+     */
     public enum panelTypes{
         MAINMENU,
         LEVELS,
@@ -17,6 +33,9 @@ public class PanelManager extends JFrame {
         RANKINGS
     }
 
+    /**
+     * @param currentGame This will be the game
+     */
     public PanelManager(GameHandler currentGame){
 
         game = currentGame;
@@ -34,12 +53,16 @@ public class PanelManager extends JFrame {
     }
 
 
-
-
+    /**
+     * @return Returns the current menu panel
+     */
     public JPanel getCurrentPanel(){
         return currentPanel;
     }
 
+    /**
+     * @param panelToChangeTo Gets an enum that will determine which panel does it change to
+     */
     public void panelChange(panelTypes panelToChangeTo){
         this.remove(currentPanel);
     switch (panelToChangeTo){
@@ -69,6 +92,9 @@ public class PanelManager extends JFrame {
 
     }
 
+    /**
+     * @param i Initiates the game run method and runs the i th level
+     */
     public void gameRun(int i){
 
         this.remove(currentPanel);
@@ -76,6 +102,10 @@ public class PanelManager extends JFrame {
 
     }
 
+    /**
+     * @param panelToSet This panel will be set as current panel
+     * @return Return the panel that has been set for safety
+     */
     public JPanel setCurrentPanel(JPanel panelToSet){
         currentPanel = panelToSet;
         return currentPanel;

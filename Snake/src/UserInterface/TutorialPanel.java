@@ -6,14 +6,32 @@ import UserInterface.BasicComponents.TitlePanel;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This Class serves as the panel that displays the tutorial
+ */
 public class TutorialPanel extends JPanel {
 
+    /**
+     * The Display frame
+     */
     PanelManager parentFrame;
+    /**
+     * Title Panel
+     */
     JPanel titlePanel;
+    /**
+     * This panel displays the tutorial information
+     */
     JPanel tutorialField;
+    /**
+     * This panel contains the main menu button
+     */
     JPanel backPanel;
 
 
+    /**
+     * @param Frame This will be the parent frame
+     */
     public TutorialPanel(PanelManager Frame){
 
         parentFrame = Frame;

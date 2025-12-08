@@ -3,15 +3,24 @@ package GameEngine;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * This class implements the KeyListener interface which handles keyboard input
+ */
 public class KeyHandler implements KeyListener {
-    boolean keyUp, keyDown, keyRight, keyLeft;
 
 
+    /**
+     * @param e the event to be processed
+     */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * @param e the event to be processed
+     * Changes snake direction according to key pressed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -30,6 +39,9 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
     }

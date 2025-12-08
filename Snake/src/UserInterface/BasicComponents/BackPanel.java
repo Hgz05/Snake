@@ -5,10 +5,19 @@ import UserInterface.PanelManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class creates a back button used in multiple menus
+ */
 public class BackPanel extends JPanel {
 
+    /**
+     * This is the display frame here it is used to get a back reference to change panels
+     */
     PanelManager parentFrame;
 
+    /**
+     * @param Frame This will be the parent frame
+     */
     public BackPanel(PanelManager Frame){
 
         parentFrame = Frame;
