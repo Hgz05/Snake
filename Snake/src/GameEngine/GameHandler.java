@@ -18,7 +18,7 @@ public class GameHandler implements Runnable {
     /**
      * The array of loaded levels
      */
-    private final ArrayList<Level> levelArray;
+    protected final ArrayList<Level> levelArray;
     /**
      * The display frame
      */
@@ -39,7 +39,7 @@ public class GameHandler implements Runnable {
     /**
      * Number of loadable levels (Dev Feature)
      */
-    public static final int numberOfLevels = 3;
+    public static final int numberOfLevels = 10;
     /**
      * Refresh rate which also determines the difficulty
      */
@@ -201,7 +201,7 @@ public class GameHandler implements Runnable {
     /**
      * Checks for player collision and handles the collided GameObject interaction
      */
-    private void collisionCheck(){
+    protected void collisionCheck(){
 
         //Exception if object deleted
         for (GameObject currentObject : loadedGameObjects) {
