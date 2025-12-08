@@ -31,7 +31,6 @@ public class PanelManager extends JFrame {
         this.add(currentPanel);
         this.setVisible(true);
         this.pack();
-
     }
 
 

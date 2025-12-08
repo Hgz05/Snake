@@ -6,9 +6,7 @@ import UserInterface.PanelManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -28,6 +26,7 @@ public class GameHandler implements Runnable {
 
     static Snake playerSnake;
     static ArrayList<Snake> snakeArray;
+    public static boolean isBorderOff = false;
     int applesRemain = 0;
     KeyHandler keyboardInput = new KeyHandler();
 
@@ -64,7 +63,7 @@ public class GameHandler implements Runnable {
                 currentLevelPanel.add(gameObject.paintObject());
             }
         }
-        playerSnake = new Snake(30, true);
+        playerSnake = new Snake(30, isBorderOff);
         snakeArray.add(playerSnake);
         currentLevelPanel.add(playerSnake.icon);
         mainFrame.add(currentLevelPanel);

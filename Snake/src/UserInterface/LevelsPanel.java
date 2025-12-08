@@ -1,5 +1,6 @@
 package UserInterface;
 
+import GameEngine.GameHandler;
 import UserInterface.BasicComponents.BackPanel;
 import UserInterface.BasicComponents.TitlePanel;
 
@@ -56,12 +57,37 @@ public class LevelsPanel extends JPanel {
 
         //Back Button
         backPanel = new BackPanel(parentFrame);
+        backPanel.setSize(360, 120);
+        //Walls Button
+        JPanel wallPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton wallButton = new JButton();
+        wallButton.setPreferredSize(new Dimension(96,64));
+        wallButton.setText(GameHandler.isBorderOff ? "Border Off" : "Border On");
+        wallButton.addActionListener( e -> {
+
+            if(GameHandler.isBorderOff){
+                GameHandler.isBorderOff = false;
+                wallButton.setText("Border On");
+            } else {
+                GameHandler.isBorderOff = true;
+                wallButton.setText("Border Off");
+            }
+        });
+        wallPanel.add(Box.createVerticalStrut(100));
+        wallPanel.add(wallButton);
+        wallPanel.setBackground(Color.black);
+        wallPanel.setPreferredSize(new Dimension(360,120));
+
+        //Wrapper Panel
+        JPanel wrapper = new JPanel();
+        wrapper.add(backPanel);
+        wrapper.add(wallPanel);
+        wrapper.setBackground(Color.black);
 
         this.setPreferredSize(new Dimension(720,720));
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(levelsPanel, BorderLayout.CENTER);
-        this.add(backPanel, BorderLayout.SOUTH);
-
+        this.add(wrapper, BorderLayout.SOUTH);
 
     }
 
