@@ -49,6 +49,11 @@ public class TutorialPanel extends JPanel {
         tutorialImage.setIcon(new ImageIcon("res/Placeholder.jpg"));
         tutorialImage.setMaximumSize(new Dimension(300, 300));
         tutorialImage.setHorizontalAlignment(JLabel.CENTER);
+        JLabel text = new JLabel();
+        text.setText("Read The Manual");
+        text.setPreferredSize(new Dimension(96,60));
+        text.setHorizontalAlignment(JLabel.CENTER);
+        tutorialField.add(text);
         tutorialField.add(tutorialImage);
         tutorialField.setVisible(true);
 

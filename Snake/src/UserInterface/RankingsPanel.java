@@ -53,7 +53,7 @@ public class RankingsPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         //Title Panel
-        titlePanel = new TitlePanel("res/Placeholder.jpg", new Dimension(720,240));
+        titlePanel = new TitlePanel("res/Rankings.png", new Dimension(720,240));
 
 
         //Panel that contains Rankings Panel changer and Rankings panel
@@ -63,6 +63,8 @@ public class RankingsPanel extends JPanel {
 
         //Rankings Panel Changer Title
         JPanel rpcTitle = new JPanel();
+        rpcTitle.setBackground(Color.white);
+        rpcTitle.setForeground(Color.white);
         JLabel rpcText = new JLabel("Top 20 scores of level : " + currentLevel);
         rpcTitle.add(rpcText);
 
@@ -70,6 +72,7 @@ public class RankingsPanel extends JPanel {
         //Rankings Panel Changer
 
         rankingsChangerPanel = new JPanel();
+        rankingsChangerPanel.setBackground(Color.white);
         JButton goLeft = new JButton("<-");
         goLeft.addActionListener( e -> {
 
@@ -78,6 +81,7 @@ public class RankingsPanel extends JPanel {
             currentLevel--;
             rankingsPanel.add(rankingsArray.get(currentLevel-1));
             rpcText.setText("Top 20 scores of level : " + currentLevel);
+            rpcTitle.setForeground(Color.white);
             parentFrame.revalidate();
             parentFrame.repaint();
         });
@@ -89,6 +93,7 @@ public class RankingsPanel extends JPanel {
             currentLevel++;
             rankingsPanel.add(rankingsArray.get(currentLevel-1));
             rpcText.setText("Top 20 scores of level : " + currentLevel);
+            rpcTitle.setForeground(Color.white);
             parentFrame.revalidate();
             parentFrame.repaint();
         });
@@ -100,6 +105,7 @@ public class RankingsPanel extends JPanel {
         //Rankings Panel will be imported from multiple files
 
         rankingsPanel = new JPanel();
+        rankingsPanel.setBackground(Color.black);
         rankingsArray = new ArrayList<>();
 
         for(int i = 0; i < 10; i++){
